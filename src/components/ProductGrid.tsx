@@ -54,7 +54,7 @@ export default function ProductGrid({
   return (
     <section id="products-catalog" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Title & Count Row */}
-      <div className="flex items-center justify-between pb-6 border-b border-neutral-100">
+      <div className="flex items-center justify-between pb-6 border-b border-neutral-200/80">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900">
             {selectedCategory === "All" ? "All Formulations" : selectedCategory}

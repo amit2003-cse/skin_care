@@ -9,7 +9,7 @@ export default function Hero({ onExploreClick }: { onExploreClick: () => void })
   const { setIsQuizOpen } = useCart();
 
   return (
-    <section className="bg-[#FAF9F5] border-b border-neutral-100 py-10 sm:py-16">
+    <section className="bg-[#F5F2EB] border-b border-neutral-200/70 py-10 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column */}
@@ -35,7 +35,7 @@ export default function Hero({ onExploreClick }: { onExploreClick: () => void })
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
               <button
                 onClick={onExploreClick}
-                className="w-full sm:w-auto px-7 py-3 bg-neutral-900 hover:bg-neutral-800 text-white rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-3 bg-neutral-900 hover:bg-neutral-800 text-white rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs"
               >
                 <span>Shop All Creams</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -43,7 +43,7 @@ export default function Hero({ onExploreClick }: { onExploreClick: () => void })
 
               <button
                 onClick={() => setIsQuizOpen(true)}
-                className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-200 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-neutral-50 text-neutral-800 border border-neutral-200 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                 <span>Cream Advisor Quiz</span>
@@ -58,18 +58,18 @@ export default function Hero({ onExploreClick }: { onExploreClick: () => void })
             </div>
           </div>
 
-          {/* Right Column: Clean Editorial Product Image */}
+          {/* Right Column: Distinct Pop-out Card */}
           <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-sm aspect-4/5 rounded-3xl overflow-hidden shadow-sm border border-neutral-200/60 bg-white">
+            <div className="relative mx-auto max-w-sm aspect-4/5 rounded-3xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.1)] border-4 border-white bg-white">
               <SafeImage
                 src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
                 alt="Signature Ceramide Barrier Restorative Cream"
                 className="w-full h-full object-cover"
               />
 
-              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3 rounded-2xl border border-neutral-100 flex items-center justify-between">
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-md border border-neutral-100 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-bold block">
+                  <span className="text-[10px] uppercase tracking-wider text-rose-600 font-bold block">
                     Signature Formulation
                   </span>
                   <span className="text-xs font-bold text-neutral-900">
@@ -78,7 +78,7 @@ export default function Hero({ onExploreClick }: { onExploreClick: () => void })
                 </div>
                 <button
                   onClick={onExploreClick}
-                  className="text-xs font-bold text-neutral-900 underline underline-offset-2 cursor-pointer"
+                  className="text-xs font-bold text-neutral-900 underline underline-offset-2 cursor-pointer bg-neutral-50 px-2 py-1 rounded-lg border border-neutral-200/60"
                 >
                   ₹449
                 </button>

@@ -42,7 +42,7 @@ export default function Home() {
         setSelectedSkinType={setSelectedSkinType}
       />
 
-      <main className="flex-1">
+      <main className="flex-1 bg-[#F7F5F0]">
         {/* Minimal Hero */}
         <Hero onExploreClick={scrollToCatalog} />
 

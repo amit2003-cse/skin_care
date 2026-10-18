@@ -3,6 +3,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product, CartItem } from "@/types";
 
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+}
+
 interface CartContextType {
   cart: CartItem[];
   addToCart: (product: Product, size?: string, quantity?: number) => void;
@@ -25,6 +32,9 @@ interface CartContextType {
   shipping: number;
   finalTotal: number;
   totalItemCount: number;
+  user: AuthUser | null;
+  loginUser: (user: AuthUser) => void;
+  logoutUser: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -37,6 +47,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [couponCode, setCouponCode] = useState("");
   const [discountRate, setDiscountRate] = useState(0);
+  const [user, setUser] = useState<AuthUser | null>(null);
 
   // Load from local storage
   useEffect(() => {
@@ -46,6 +57,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       const savedWishlist = localStorage.getItem("innovist_wishlist");
       if (savedWishlist) setWishlist(JSON.parse(savedWishlist));
+
+      const savedUser = localStorage.getItem("innovist_user");
+      if (savedUser) setUser(JSON.parse(savedUser));
     } catch {
       // ignore
     }
@@ -67,6 +81,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       // ignore
     }
   }, [wishlist]);
+
+  const loginUser = (newUser: AuthUser) => {
+    setUser(newUser);
+    try {
+      localStorage.setItem("innovist_user", JSON.stringify(newUser));
+    } catch {
+      // ignore
+    }
+  };
+
+  const logoutUser = () => {
+    setUser(null);
+    try {
+      localStorage.removeItem("innovist_user");
+    } catch {
+      // ignore
+    }
+  };
 
   const addToCart = (product: Product, size?: string, quantity = 1) => {
     const selectedSize = size || product.sizes[0] || "Standard";
@@ -167,6 +199,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         shipping,
         finalTotal,
         totalItemCount,
+        user,
+        loginUser,
+        logoutUser,
       }}
     >
       {children}

@@ -33,9 +33,17 @@ export default function Header({
   selectedSkinType,
   setSelectedSkinType,
 }: HeaderProps) {
-  const { totalItemCount, setIsCartOpen, setIsAuthOpen, setIsQuizOpen, wishlist } =
-    useCart();
+  const {
+    totalItemCount,
+    setIsCartOpen,
+    setIsAuthOpen,
+    setIsQuizOpen,
+    wishlist,
+    user,
+    logoutUser,
+  } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-xs">
@@ -171,14 +179,58 @@ export default function Header({
             </button>
 
             {/* User Account / Google Sign-in */}
-            <button
-              onClick={() => setIsAuthOpen(true)}
-              className="flex items-center gap-1.5 p-2 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
-              title="Login / Account"
-            >
-              <User className="w-5 h-5" />
-              <span className="hidden lg:inline text-xs font-medium">Account</span>
-            </button>
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                  className="flex items-center gap-2 p-1.5 pl-2 pr-3 bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors cursor-pointer text-xs font-bold text-neutral-800"
+                >
+                  {user.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name}
+                      className="w-6 h-6 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center text-[11px] font-black">
+                      {user.name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <span className="hidden sm:inline max-w-24 truncate">{user.name}</span>
+                </button>
+
+                {userDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-neutral-100 py-2 z-50 animate-in fade-in zoom-in-95">
+                    <div className="px-4 py-2 border-b border-neutral-100">
+                      <div className="text-xs font-bold text-neutral-900 truncate">
+                        {user.name}
+                      </div>
+                      <div className="text-[10px] text-neutral-500 truncate">
+                        {user.email}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        logoutUser();
+                        setUserDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsAuthOpen(true)}
+                className="flex items-center gap-1.5 p-2 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
+                title="Login / Account"
+              >
+                <User className="w-5 h-5" />
+                <span className="hidden lg:inline text-xs font-medium">Sign In</span>
+              </button>
+            )}
 
             {/* Shopping Bag Button */}
             <button

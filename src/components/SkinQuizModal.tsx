@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { PRODUCTS } from "@/data/products";
+import SafeImage from "./SafeImage";
 import { X, Sparkles, Check, ArrowRight, RotateCcw } from "lucide-react";
 
 export default function SkinQuizModal() {
@@ -148,11 +149,13 @@ export default function SkinQuizModal() {
             </p>
 
             <div className="p-3.5 rounded-2xl bg-neutral-50 border border-neutral-200 mb-5 flex items-center gap-3">
-              <img
-                src={recommendedCream.image}
-                alt={recommendedCream.title}
-                className="w-16 h-16 object-cover rounded-xl bg-white border border-neutral-200 shrink-0"
-              />
+              <div className="w-16 h-16 rounded-xl overflow-hidden bg-white border border-neutral-200 shrink-0">
+                <SafeImage
+                  src={recommendedCream.image}
+                  alt={recommendedCream.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div className="flex-1 min-w-0">
                 <span className="text-[10px] font-bold uppercase text-rose-600 bg-rose-50 px-2 py-0.5 rounded">
                   {recommendedCream.texture}

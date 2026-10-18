@@ -1,46 +1,46 @@
 import React from "react";
-import { ShieldCheck, Sparkles, HeartHandshake, Leaf, Truck } from "lucide-react";
+import { ShieldCheck, Leaf, Sparkles, Truck } from "lucide-react";
 
 export default function TrustBadges() {
   const perks = [
     {
       icon: ShieldCheck,
       title: "Dermatologist Tested",
-      desc: "Proven safety on all Indian skin & hair types",
+      desc: "Safe for sensitive skin barriers",
     },
     {
       icon: Leaf,
-      title: "Clean & Toxin Free",
-      desc: "Zero Parabens, Sulphates, and Mineral oils",
+      title: "Clean Formulations",
+      desc: "Zero parabens or harsh fragrances",
     },
     {
       icon: Sparkles,
-      title: "Clinical Actives",
-      desc: "Standardized active potencies for visible change",
+      title: "Standardized Actives",
+      desc: "Verified clinical potencies",
     },
     {
       icon: Truck,
-      title: "Free Express Shipping",
-      desc: "On orders above ₹499 across all India pin codes",
+      title: "Complimentary Delivery",
+      desc: "On orders above ₹499 in India",
     },
   ];
 
   return (
-    <div className="bg-neutral-900 text-white py-12 border-y border-neutral-800">
+    <div className="bg-[#FAF9F5] border-y border-neutral-100 py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {perks.map((p, idx) => {
             const Icon = p.icon;
             return (
-              <div key={idx} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-neutral-800 text-rose-400 flex items-center justify-center shrink-0 border border-neutral-700">
-                  <Icon className="w-6 h-6" />
+              <div key={idx} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3">
+                <div className="w-9 h-9 rounded-full bg-white shadow-xs text-neutral-800 flex items-center justify-center shrink-0 border border-neutral-100">
+                  <Icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white tracking-wide">
+                  <h4 className="text-xs font-semibold text-neutral-900 tracking-wide">
                     {p.title}
                   </h4>
-                  <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                  <p className="text-[11px] text-neutral-500 mt-0.5 leading-snug">
                     {p.desc}
                   </p>
                 </div>

@@ -7,11 +7,7 @@ import {
   Heart,
   User,
   Sparkles,
-  Menu,
   X,
-  ShieldCheck,
-  ChevronRight,
-  Droplet,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { CREAM_CATEGORIES, SKIN_TYPES } from "@/data/products";
@@ -42,105 +38,54 @@ export default function Header({
     user,
     logoutUser,
   } = useCart();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [searchOpen, setSearchOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 shadow-xs">
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-neutral-900 via-rose-950 to-neutral-900 text-white text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2">
-        <span className="inline-block animate-pulse">✨</span>
-        <span>FLAT 20% OFF ON ALL CLINICAL FACE CREAMS</span>
-        <span className="hidden sm:inline text-rose-300">|</span>
-        <span className="hidden sm:inline bg-rose-500/30 px-2 py-0.5 rounded text-[11px] font-mono border border-rose-400/30">
-          CODE: FIRST20
-        </span>
-        <span className="hidden md:inline">| Free Shipping above ₹499 🚚</span>
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100">
+      {/* Minimal Announcement Bar */}
+      <div className="bg-[#171717] text-white text-[11px] py-2 px-4 text-center font-normal tracking-wider flex items-center justify-center gap-2">
+        <span>COMPLIMENTARY SHIPPING OVER ₹499</span>
+        <span className="text-neutral-500">•</span>
+        <span className="font-mono text-neutral-300">CODE: FIRST20</span>
       </div>
 
-      {/* Sub-header for Skin Type filter */}
-      <div className="bg-neutral-50 border-b border-neutral-200/60 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-1.5 text-xs font-medium text-neutral-600">
-          <div className="flex items-center gap-4">
-            <span className="text-neutral-400 font-semibold tracking-wider uppercase text-[10px]">
-              Shop By Skin Type:
-            </span>
-            {SKIN_TYPES.map((type) => (
-              <button
-                key={type.id}
-                onClick={() => setSelectedSkinType(type.id)}
-                className={`transition-all duration-200 pb-0.5 border-b-2 cursor-pointer ${
-                  selectedSkinType === type.id
-                    ? "border-rose-600 text-rose-600 font-bold"
-                    : "border-transparent hover:text-neutral-950"
-                }`}
-              >
-                {type.name}
-              </button>
-            ))}
-          </div>
-
-          <button
-            onClick={() => setIsQuizOpen(true)}
-            className="flex items-center gap-1.5 text-rose-600 hover:text-rose-700 font-semibold bg-rose-50 px-3 py-1 rounded-full border border-rose-200/60 transition-all hover:shadow-xs cursor-pointer"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-rose-500" />
-            <span>Face Cream Match Quiz</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Navigation Bar */}
+      {/* Main Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
-          {/* Mobile menu button */}
+          {/* Brand Logo */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-neutral-700 hover:text-neutral-950"
-            aria-label="Toggle menu"
+            onClick={() => {
+              setSelectedCategory("All");
+              setSelectedSkinType("All");
+              setSearchQuery("");
+            }}
+            className="text-left cursor-pointer group"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span className="text-xl sm:text-2xl font-bold tracking-[0.2em] text-neutral-900 group-hover:opacity-80 transition-opacity">
+              INNOVIST
+            </span>
+            <span className="block text-[8px] uppercase tracking-[0.25em] text-neutral-400 font-medium">
+              Clinical Face Creams
+            </span>
           </button>
 
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                setSelectedCategory("All");
-                setSelectedSkinType("All");
-                setSearchQuery("");
-              }}
-              className="text-left cursor-pointer"
-            >
-              <div className="flex items-center gap-1.5">
-                <span className="text-2xl sm:text-3xl font-black tracking-tight text-neutral-950">
-                  INNOVIST
-                </span>
-                <span className="bg-rose-100 text-rose-700 font-extrabold text-[10px] px-1.5 py-0.5 rounded tracking-wider uppercase">
-                  CREAMS
-                </span>
-              </div>
-              <span className="block text-[9px] uppercase tracking-widest text-neutral-500 font-semibold -mt-1">
-                Clinical Face Moisturizers
-              </span>
-            </button>
-          </div>
-
-          {/* Search bar */}
-          <div className="flex-1 max-w-lg hidden sm:block relative">
+          {/* Desktop Search Bar */}
+          <div className="flex-1 max-w-md hidden md:block">
             <div className="relative">
               <input
                 type="text"
-                placeholder="Search Ceramide Barrier, Retinol Night Cream, Oil-Free Gel..."
+                placeholder="Search by ingredient (Ceramides, Retinol, Salicylic)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 text-sm bg-neutral-100/80 border border-neutral-200 rounded-full focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
+                className="w-full pl-9 pr-4 py-2 text-xs bg-neutral-100/70 border border-transparent rounded-full focus:bg-white focus:border-neutral-300 focus:outline-hidden transition-all placeholder:text-neutral-400"
               />
-              <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-3" />
+              <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-2.5" />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-2.5 text-xs text-neutral-400 hover:text-neutral-600 bg-neutral-200 rounded-full w-5 h-5 flex items-center justify-center cursor-pointer"
+                  className="absolute right-2.5 top-2 text-[10px] text-neutral-400 hover:text-neutral-700 bg-neutral-200 rounded-full w-4 h-4 flex items-center justify-center cursor-pointer"
                 >
                   ✕
                 </button>
@@ -148,14 +93,24 @@ export default function Header({
             </div>
           </div>
 
-          {/* Action Icons */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Right Action Icons */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Mobile Search Toggle */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="md:hidden p-2 text-neutral-600 hover:text-neutral-900 cursor-pointer"
+              aria-label="Search"
+            >
+              <Search className="w-4 h-4" />
+            </button>
+
+            {/* Quiz Button */}
             <button
               onClick={() => setIsQuizOpen(true)}
-              className="md:hidden p-2 text-rose-600 hover:bg-rose-50 rounded-full"
-              title="Cream Quiz"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-neutral-700 hover:bg-neutral-100 transition-colors cursor-pointer"
             >
-              <Sparkles className="w-5 h-5" />
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span className="hidden sm:inline">Cream Quiz</span>
             </button>
 
             {/* Wishlist */}
@@ -163,49 +118,49 @@ export default function Header({
               onClick={() => {
                 alert(
                   wishlist.length > 0
-                    ? `You have saved ${wishlist.length} face cream(s) in your wishlist!`
-                    : "Your wishlist is empty. Tap the heart icon on any face cream to save it!"
+                    ? `You have ${wishlist.length} item(s) in your wishlist!`
+                    : "Wishlist is empty. Tap the heart on products to save them!"
                 );
               }}
-              className="relative p-2 text-neutral-700 hover:text-rose-600 hover:bg-rose-50 rounded-full transition-colors cursor-pointer"
-              title="Wishlist"
+              className="relative p-2 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-100 transition-colors cursor-pointer"
+              aria-label="Wishlist"
             >
-              <Heart className="w-5 h-5" />
+              <Heart className="w-4 h-4" />
               {wishlist.length > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-rose-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 right-1 bg-neutral-900 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                   {wishlist.length}
                 </span>
               )}
             </button>
 
-            {/* User Account / Google Sign-in */}
+            {/* User Account / Google Login */}
             {user ? (
               <div className="relative">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2 p-1.5 pl-2 pr-3 bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors cursor-pointer text-xs font-bold text-neutral-800"
+                  className="flex items-center gap-1.5 p-1 pl-2 pr-2.5 bg-neutral-100 hover:bg-neutral-200 rounded-full transition-colors cursor-pointer text-xs font-medium text-neutral-800"
                 >
                   {user.image ? (
                     <img
                       src={user.image}
                       alt={user.name}
-                      className="w-6 h-6 rounded-full object-cover"
+                      className="w-5 h-5 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center text-[11px] font-black">
-                      {user.name.charAt(0).toUpperCase()}
+                    <div className="w-5 h-5 rounded-full bg-neutral-900 text-white flex items-center justify-center text-[10px] font-bold">
+                      {user.name.charAt(0)}
                     </div>
                   )}
-                  <span className="hidden sm:inline max-w-24 truncate">{user.name}</span>
+                  <span className="hidden sm:inline max-w-20 truncate">{user.name}</span>
                 </button>
 
                 {userDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-neutral-100 py-2 z-50 animate-in fade-in zoom-in-95">
-                    <div className="px-4 py-2 border-b border-neutral-100">
-                      <div className="text-xs font-bold text-neutral-900 truncate">
+                  <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-neutral-100 py-1.5 z-50 text-xs">
+                    <div className="px-3 py-1.5 border-b border-neutral-100">
+                      <div className="font-semibold text-neutral-900 truncate">
                         {user.name}
                       </div>
-                      <div className="text-[10px] text-neutral-500 truncate">
+                      <div className="text-[10px] text-neutral-400 truncate">
                         {user.email}
                       </div>
                     </div>
@@ -214,7 +169,7 @@ export default function Header({
                         logoutUser();
                         setUserDropdownOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors"
+                      className="w-full text-left px-3 py-1.5 text-rose-600 hover:bg-rose-50 font-medium cursor-pointer"
                     >
                       Sign Out
                     </button>
@@ -224,23 +179,22 @@ export default function Header({
             ) : (
               <button
                 onClick={() => setIsAuthOpen(true)}
-                className="flex items-center gap-1.5 p-2 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
-                title="Login / Account"
+                className="p-2 text-neutral-600 hover:text-neutral-900 rounded-full hover:bg-neutral-100 transition-colors cursor-pointer"
+                aria-label="Account"
               >
-                <User className="w-5 h-5" />
-                <span className="hidden lg:inline text-xs font-medium">Sign In</span>
+                <User className="w-4 h-4" />
               </button>
             )}
 
             {/* Shopping Bag Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs hover:shadow-md cursor-pointer"
+              className="relative p-2 text-neutral-900 hover:bg-neutral-100 rounded-full transition-colors cursor-pointer ml-1"
+              aria-label="Bag"
             >
               <ShoppingBag className="w-4 h-4" />
-              <span className="hidden sm:inline">Bag</span>
               {totalItemCount > 0 && (
-                <span className="bg-rose-500 text-white text-[11px] font-bold px-1.5 py-0.2 rounded-full min-w-5 text-center">
+                <span className="absolute -top-0.5 -right-0.5 bg-neutral-900 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {totalItemCount}
                 </span>
               )}
@@ -248,81 +202,69 @@ export default function Header({
           </div>
         </div>
 
-        {/* Mobile Search input */}
-        <div className="sm:hidden pb-3">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search face creams & gels..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-xs bg-neutral-100 border border-neutral-200 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-rose-500"
-            />
-            <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-2.5" />
+        {/* Mobile Search Input Drawer (Collapsible) */}
+        {searchOpen && (
+          <div className="md:hidden pb-3 pt-1">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search face creams..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-8 py-2 text-xs bg-neutral-100 rounded-full focus:bg-white focus:outline-hidden"
+                autoFocus
+              />
+              <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-2.5" />
+              <button
+                onClick={() => setSearchOpen(false)}
+                className="absolute right-2.5 top-2 text-neutral-400 p-0.5"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Cream Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar border-t border-neutral-100 text-xs">
-          {CREAM_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
-                selectedCategory === cat.id
-                  ? "bg-neutral-900 text-white shadow-xs"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-              }`}
-            >
-              <span>{cat.icon}</span>
-              <span>{cat.name}</span>
-            </button>
-          ))}
-          <div className="ml-auto flex items-center gap-2 pl-4 text-[11px] text-emerald-600 font-semibold hidden lg:flex">
-            <ShieldCheck className="w-4 h-4" />
-            <span>Non-Comedogenic &amp; Fragrance Free</span>
+        {/* Minimal Category & Skin Type Filter Row */}
+        <div className="flex items-center justify-between gap-3 overflow-x-auto py-2.5 no-scrollbar border-t border-neutral-100 text-xs">
+          {/* Category Pills */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            {CREAM_CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
+                  selectedCategory === cat.id
+                    ? "bg-neutral-900 text-white"
+                    : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Skin Type selector */}
+          <div className="hidden lg:flex items-center gap-1.5 shrink-0 pl-4 border-l border-neutral-200">
+            <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold">
+              Skin:
+            </span>
+            {SKIN_TYPES.map((type) => (
+              <button
+                key={type.id}
+                onClick={() => setSelectedSkinType(type.id)}
+                className={`text-[11px] px-2 py-0.5 rounded font-medium cursor-pointer transition-colors ${
+                  selectedSkinType === type.id
+                    ? "text-neutral-900 font-bold underline underline-offset-4"
+                    : "text-neutral-400 hover:text-neutral-700"
+                }`}
+              >
+                {type.name}
+              </button>
+            ))}
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-neutral-200 p-4 space-y-4">
-          <div>
-            <div className="text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">
-              Filter by Skin Type
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {SKIN_TYPES.map((type) => (
-                <button
-                  key={type.id}
-                  onClick={() => {
-                    setSelectedSkinType(type.id);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`p-2.5 rounded-lg text-left text-xs font-semibold border ${
-                    selectedSkinType === type.id
-                      ? "border-rose-500 bg-rose-50 text-rose-700"
-                      : "border-neutral-200 bg-neutral-50 text-neutral-800"
-                  }`}
-                >
-                  {type.name}
-                </button>
-              ))}
-            </div>
-          </div>
-          <button
-            onClick={() => {
-              setIsQuizOpen(true);
-              setMobileMenuOpen(false);
-            }}
-            className="w-full py-2.5 px-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg text-xs font-bold flex items-center justify-between cursor-pointer"
-          >
-            <span>Take Face Cream Match Quiz</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-      )}
     </header>
   );
 }

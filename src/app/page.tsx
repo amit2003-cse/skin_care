@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import CreamCategoryTabs from "@/components/CreamCategoryTabs";
 import ProductGrid from "@/components/ProductGrid";
 import TrustBadges from "@/components/TrustBadges";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -44,16 +43,10 @@ export default function Home() {
       />
 
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Minimal Hero */}
         <Hero onExploreClick={scrollToCatalog} />
 
-        {/* Cream Category Tabs */}
-        <CreamCategoryTabs
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-
-        {/* Product Catalog Section */}
+        {/* Minimal Product Catalog Section (Mobile 2-column) */}
         <ProductGrid
           products={PRODUCTS}
           selectedCategory={selectedCategory}
@@ -62,14 +55,14 @@ export default function Home() {
           onResetFilters={handleResetFilters}
         />
 
-        {/* Trust Badges */}
+        {/* Clean Trust Strip */}
         <TrustBadges />
 
-        {/* Customer Reviews */}
+        {/* Client Reviews */}
         <ReviewsSection />
       </main>
 
-      {/* Footer */}
+      {/* Clean Footer */}
       <Footer />
 
       {/* Global Modals & Drawers */}

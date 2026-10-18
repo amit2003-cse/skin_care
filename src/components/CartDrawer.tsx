@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import SafeImage from "./SafeImage";
 import {
   X,
   Trash2,
@@ -73,7 +74,7 @@ export default function CartDrawer() {
       />
 
       {/* Drawer Panel */}
-      <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div className="absolute inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
           {/* Drawer Header */}
           <div className="p-4 sm:p-5 border-b border-neutral-100 flex items-center justify-between">
@@ -138,8 +139,8 @@ export default function CartDrawer() {
                   className="flex gap-3.5 p-3 rounded-2xl bg-neutral-50/70 border border-neutral-200/60"
                 >
                   {/* Item Image */}
-                  <div className="w-20 h-20 bg-white rounded-xl overflow-hidden shrink-0 border border-neutral-100">
-                    <img
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-xl overflow-hidden shrink-0 border border-neutral-100">
+                    <SafeImage
                       src={item.product.image}
                       alt={item.product.title}
                       className="w-full h-full object-cover"

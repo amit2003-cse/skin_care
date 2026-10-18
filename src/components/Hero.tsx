@@ -62,7 +62,7 @@ export default function Hero({ onExploreClick }: { onExploreClick: () => void })
           <div className="lg:col-span-5">
             <div className="relative mx-auto max-w-sm aspect-4/5 rounded-3xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.1)] border-4 border-white bg-white">
               <SafeImage
-                src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
+                src="/products/ceramide-cream.jpg"
                 alt="Signature Ceramide Barrier Restorative Cream"
                 className="w-full h-full object-cover"
               />

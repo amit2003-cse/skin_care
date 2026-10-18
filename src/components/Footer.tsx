@@ -23,8 +23,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-neutral-100">
           {/* Brand Info */}
           <div className="md:col-span-2 space-y-3">
-            <span className="text-lg font-bold tracking-[0.2em] text-neutral-900">
-              INNOVIST
+            <span className="text-lg font-black tracking-[0.18em] text-neutral-950">
+              THE CREAM CO.
             </span>
             <p className="text-xs text-neutral-500 max-w-sm leading-relaxed">
               Formulating clinical face moisturizers with standardized ceramides,
@@ -78,14 +78,14 @@ export default function Footer() {
               <li>Track Order</li>
               <li>Shipping &amp; Returns</li>
               <li>Face Cream Match Quiz</li>
-              <li>Contact: care@innovist.com</li>
+              <li>Contact: care@thecreamco.com</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-neutral-400">
-          <span>© 2026 INNOVIST CREAMS. ALL RIGHTS RESERVED.</span>
+          <span>© 2026 THE CREAM CO. ALL RIGHTS RESERVED.</span>
           <div className="flex items-center gap-4">
             <span>Razorpay Secured</span>
             <span>•</span>

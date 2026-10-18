@@ -71,12 +71,12 @@ export default function AuthModal() {
         {/* Brand header */}
         <div className="mb-6">
           <div className="flex items-center justify-center gap-1.5">
-            <span className="text-2xl font-bold tracking-[0.2em] text-neutral-950">
-              INNOVIST
+            <span className="text-2xl font-black tracking-[0.18em] text-neutral-950">
+              THE CREAM CO.
             </span>
           </div>
-          <span className="block text-[9px] uppercase tracking-[0.25em] text-neutral-400 font-semibold mt-0.5">
-            Clinical Face Creams
+          <span className="block text-[9px] uppercase tracking-[0.25em] text-neutral-400 font-bold mt-0.5">
+            Clinical Face Formulations
           </span>
           <p className="text-xs text-neutral-500 mt-3 leading-relaxed">
             Sign in with your Google account to access your personalized face cream

@@ -63,11 +63,11 @@ export default function Header({
             }}
             className="text-left cursor-pointer group"
           >
-            <span className="text-xl sm:text-2xl font-bold tracking-[0.2em] text-neutral-900 group-hover:opacity-80 transition-opacity">
-              INNOVIST
+            <span className="text-xl sm:text-2xl font-black tracking-[0.18em] text-neutral-950 group-hover:opacity-85 transition-opacity">
+              THE CREAM CO.
             </span>
-            <span className="block text-[8px] uppercase tracking-[0.25em] text-neutral-400 font-medium">
-              Clinical Face Creams
+            <span className="block text-[8px] uppercase tracking-[0.25em] text-neutral-400 font-bold">
+              Clinical Face Formulations
             </span>
           </button>
 
